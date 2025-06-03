@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather API Test - ShoreSquad</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f0f9ff; }
+        .test-container { max-width: 800px; margin: 0 auto; }
+        .test-result { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .success { border-left: 4px solid #10B981; }
+        .error { border-left: 4px solid #EF4444; }
+        .loading { border-left: 4px solid #0EA5E9; }
+        .btn { padding: 12px 24px; margin: 10px 5px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; }
+        .btn-primary { background: #0EA5E9; color: white; }
+        .btn-primary:hover { background: #0284C7; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 4px; font-size: 12px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 ShoreSquad Weather API Test</h1>
+        <p>This page tests the Singapore NEA weather API integration for the ShoreSquad app.</p>
+        
+        <div class="test-controls">
+            <button class="btn btn-primary" onclick="testAllAPIs()">🚀 Test All Weather APIs</button>
+            <button class="btn btn-primary" onclick="test2HourForecast()">🌤️ Test 2-Hour Forecast</button>
+            <button class="btn btn-primary" onclick="test4DayForecast()">📅 Test 4-Day Forecast</button>
+            <button class="btn btn-primary" onclick="testTemperature()">🌡️ Test Temperature</button>
+        </div>
+        
+        <div id="test-results"></div>
+    </div>
+
+    <script>
+        const resultsDiv = document.getElementById('test-results');
+        
+        function addResult(title, content, type = 'loading') {
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.innerHTML = `<h3>${title}</h3><div>${content}</div>`;
+            resultsDiv.appendChild(div);
+            return div;
+        }
+        
+        async function test2HourForecast() {
+            const resultDiv = addResult('2-Hour Weather Forecast Test', 'Testing...', 'loading');
+            
+            try {
+                const response = await fetch('https://api.data.gov.sg/v1/environment/2-hour-weather-forecast');
+                const data = await response.json();
+                
+                const pasirRis = data.items[0].forecasts.find(f => f.area === 'Pasir Ris');
+                const result = pasirRis || data.items[0].forecasts[0];
+                
+                resultDiv.className = 'test-result success';
+                resultDiv.innerHTML = `
+                    <h3>✅ 2-Hour Weather Forecast Test - SUCCESS</h3>
+                    <p><strong>Area:</strong> ${result.area}</p>
+                    <p><strong>Forecast:</strong> ${result.forecast}</p>
+                    <p><strong>Update Time:</strong> ${data.items[0].update_timestamp}</p>
+                    <details>
+                        <summary>Raw API Response</summary>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </details>
+                `;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.innerHTML = `
+                    <h3>❌ 2-Hour Weather Forecast Test - FAILED</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+            }
+        }
+        
+        async function test4DayForecast() {
+            const resultDiv = addResult('4-Day Weather Forecast Test', 'Testing...', 'loading');
+            
+            try {
+                const response = await fetch('https://api.data.gov.sg/v1/environment/4-day-weather-forecast');
+                const data = await response.json();
+                
+                const forecasts = data.items[0].forecasts;
+                
+                resultDiv.className = 'test-result success';
+                resultDiv.innerHTML = `
+                    <h3>✅ 4-Day Weather Forecast Test - SUCCESS</h3>
+                    <p><strong>Forecast Days:</strong> ${forecasts.length}</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 10px 0;">
+                        ${forecasts.map(day => `
+                            <div style="background: #f8f9fa; padding: 10px; border-radius: 6px;">
+                                <strong>${day.date}</strong><br>
+                                ${day.forecast}<br>
+                                ${day.temperature.high}°C - ${day.temperature.low}°C
+                            </div>
+                        `).join('')}
+                    </div>
+                    <details>
+                        <summary>Raw API Response</summary>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </details>
+                `;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.innerHTML = `
+                    <h3>❌ 4-Day Weather Forecast Test - FAILED</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+            }
+        }
+        
+        async function testTemperature() {
+            const resultDiv = addResult('Air Temperature Test', 'Testing...', 'loading');
+            
+            try {
+                const response = await fetch('https://api.data.gov.sg/v1/environment/air-temperature');
+                const data = await response.json();
+                
+                const stations = data.metadata.stations;
+                const readings = data.items[0].readings;
+                const pasirRisStation = stations.find(s => s.name.includes('Pasir Ris') || s.name.includes('East')) || stations[0];
+                const reading = readings.find(r => r.station_id === pasirRisStation.id);
+                
+                resultDiv.className = 'test-result success';
+                resultDiv.innerHTML = `
+                    <h3>✅ Air Temperature Test - SUCCESS</h3>
+                    <p><strong>Station:</strong> ${pasirRisStation.name}</p>
+                    <p><strong>Temperature:</strong> ${reading ? reading.value : 'N/A'}°C</p>
+                    <p><strong>Location:</strong> ${pasirRisStation.location.latitude}, ${pasirRisStation.location.longitude}</p>
+                    <p><strong>Total Stations:</strong> ${stations.length}</p>
+                    <details>
+                        <summary>Raw API Response</summary>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </details>
+                `;
+            } catch (error) {
+                resultDiv.className = 'test-result error';
+                resultDiv.innerHTML = `
+                    <h3>❌ Air Temperature Test - FAILED</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+            }
+        }
+        
+        async function testAllAPIs() {
+            resultsDiv.innerHTML = '<h2>🧪 Running All Weather API Tests...</h2>';
+            
+            await test2HourForecast();
+            await test4DayForecast();
+            await testTemperature();
+            
+            const successCount = document.querySelectorAll('.test-result.success').length;
+            const totalTests = 3;
+            
+            addResult(
+                `Test Summary: ${successCount}/${totalTests} tests passed`,
+                successCount === totalTests ? 
+                    '🎉 All weather APIs are working correctly!' : 
+                    '⚠️ Some APIs may have issues. Check individual test results.',
+                successCount === totalTests ? 'success' : 'error'
+            );
+        }
+        
+        // Auto-run test on page load
+        window.addEventListener('load', () => {
+            setTimeout(testAllAPIs, 1000);
+        });
+    </script>
+</body>
+</html>

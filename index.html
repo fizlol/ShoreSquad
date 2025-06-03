@@ -74,10 +74,9 @@
                 <div class="stat-card">
                     <div class="stat-number" data-count="1250">0</div>
                     <div class="stat-label">Squads Active</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" data-count="8420">0</div>
-                    <div class="stat-label">Pounds Collected</div>
+                </div>                <div class="stat-card">
+                    <div class="stat-number" data-count="3820">0</div>
+                    <div class="stat-label">Kilograms Collected</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number" data-count="342">0</div>
@@ -106,42 +105,64 @@
             </div>
             <button class="btn btn-outline load-more-btn" id="loadMoreEvents">Load More Events</button>
         </div>
-    </section>
-
-    <!-- Weather Section -->
+    </section>    <!-- Weather Section -->
     <section id="weather" class="weather-section">
         <div class="container">
-            <h2 class="section-title">Weather Conditions</h2>
+            <h2 class="section-title">Singapore Weather Forecast</h2>
+            
+            <!-- Current Weather Widget -->
             <div class="weather-widget">
                 <div class="current-weather">
                     <div class="weather-icon" id="weatherIcon">☀️</div>
                     <div class="weather-info">
-                        <div class="temperature" id="temperature">24°C</div>
+                        <div class="temperature" id="temperature">28°C</div>
                         <div class="weather-desc" id="weatherDesc">Perfect for cleanup!</div>
-                        <div class="location" id="location">Santa Monica Beach</div>
+                        <div class="location" id="location">Singapore</div>
                     </div>
                 </div>
                 <div class="weather-details">
                     <div class="weather-detail">
-                        <span class="detail-label">Wind</span>
-                        <span class="detail-value" id="windSpeed">8 mph</span>
-                    </div>
-                    <div class="weather-detail">
                         <span class="detail-label">Humidity</span>
-                        <span class="detail-value" id="humidity">65%</span>
+                        <span class="detail-value" id="humidity">75%</span>
                     </div>
                     <div class="weather-detail">
-                        <span class="detail-label">UV Index</span>
-                        <span class="detail-value" id="uvIndex">6</span>
+                        <span class="detail-label">2-Hour Forecast</span>
+                        <span class="detail-value" id="shortForecast">Partly Cloudy</span>
                     </div>
                     <div class="weather-detail">
-                        <span class="detail-label">Tide</span>
-                        <span class="detail-value" id="tideInfo">Low 2:30 PM</span>
+                        <span class="detail-label">Update Time</span>
+                        <span class="detail-value" id="updateTime">Just now</span>
+                    </div>
+                    <div class="weather-detail">
+                        <span class="detail-label">Location</span>
+                        <span class="detail-value" id="nearestStation">Pasir Ris</span>
                     </div>
                 </div>
             </div>
+
+            <!-- 4-Day Forecast -->
+            <div class="forecast-section">
+                <h3 class="forecast-title">4-Day Weather Forecast</h3>
+                <div class="forecast-grid" id="forecastGrid">
+                    <!-- Forecast cards will be loaded dynamically -->
+                    <div class="forecast-card loading">
+                        <div class="forecast-day">Loading...</div>
+                        <div class="forecast-icon">⏳</div>
+                        <div class="forecast-temps">--°C</div>
+                        <div class="forecast-desc">Loading forecast data...</div>
+                    </div>
+                </div>
+            </div>            <!-- Weather Data Attribution -->
+            <div class="weather-attribution">
+                <p>Weather data provided by <strong>Singapore's National Environment Agency (NEA)</strong> via Data.gov.sg</p>
+                <p><em>Real-time updates from official weather stations across Singapore</em></p>
+                <div class="weather-controls">
+                    <button class="btn btn-outline btn-sm" onclick="window.shoreSquadApp?.refreshWeatherData()">🔄 Refresh Weather</button>
+                    <button class="btn btn-outline btn-sm" onclick="window.shoreSquadApp?.testWeatherAPIs()">🧪 Test APIs</button>
+                </div>
+            </div>
         </div>
-    </section>    <!-- Next Cleanup Location -->
+    </section><!-- Next Cleanup Location -->
     <section id="next-cleanup" class="next-cleanup-section">
         <div class="container">
             <h2 class="section-title">Next Cleanup Location</h2>
@@ -197,7 +218,7 @@
                     <div class="squad-card">
                         <h3>Ocean Guardians</h3>
                         <p class="squad-members">24 members</p>
-                        <p class="squad-impact">287 lbs collected this month</p>
+                        <p class="squad-impact">130 kg collected this month</p>
                         <div class="member-avatars">
                             <div class="avatar">🧑‍🤝‍🧑</div>
                             <div class="avatar">👩‍🤝‍👨</div>
