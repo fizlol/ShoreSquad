@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ShoreSquad - Rally your crew, track weather, and hit the next beach cleanup with our dope map app!">
+    <meta name="keywords" content="beach cleanup, environmental action, weather tracking, community, youth engagement">
+    <title>ShoreSquad - Beach Cleanup Community</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1 class="logo">🌊 ShoreSquad</h1>
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-menu" role="menubar">
+                <li class="nav-item" role="none">
+                    <a href="#home" class="nav-link" role="menuitem">Home</a>
+                </li>
+                <li class="nav-item" role="none">
+                    <a href="#events" class="nav-link" role="menuitem">Events</a>
+                </li>
+                <li class="nav-item" role="none">
+                    <a href="#weather" class="nav-link" role="menuitem">Weather</a>
+                </li>
+                <li class="nav-item" role="none">
+                    <a href="#squad" class="nav-link" role="menuitem">Your Squad</a>
+                </li>
+                <li class="nav-item" role="none">
+                    <a href="#impact" class="nav-link" role="menuitem">Impact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Rally Your Crew, Clean the Coast</h1>
+            <p class="hero-subtitle">Track weather, find cleanup events, and make eco-action fun with your squad!</p>
+            <div class="hero-actions">
+                <button class="btn btn-primary" id="joinSquadBtn">Join a Squad</button>
+                <button class="btn btn-secondary" id="createEventBtn">Create Event</button>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="wave-animation"></div>
+        </div>
+    </header>
+
+    <!-- Quick Stats -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" data-count="1250">0</div>
+                    <div class="stat-label">Squads Active</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="8420">0</div>
+                    <div class="stat-label">Pounds Collected</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="342">0</div>
+                    <div class="stat-label">Beaches Cleaned</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="15600">0</div>
+                    <div class="stat-label">Squad Members</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="events-section">
+        <div class="container">
+            <h2 class="section-title">Upcoming Beach Cleanups</h2>
+            <div class="events-filters">
+                <button class="filter-btn active" data-filter="all">All Events</button>
+                <button class="filter-btn" data-filter="weekend">This Weekend</button>
+                <button class="filter-btn" data-filter="nearby">Near Me</button>
+                <button class="filter-btn" data-filter="beginner">Beginner Friendly</button>
+            </div>
+            <div class="events-grid" id="eventsGrid">
+                <!-- Events will be loaded dynamically -->
+            </div>
+            <button class="btn btn-outline load-more-btn" id="loadMoreEvents">Load More Events</button>
+        </div>
+    </section>
+
+    <!-- Weather Section -->
+    <section id="weather" class="weather-section">
+        <div class="container">
+            <h2 class="section-title">Weather Conditions</h2>
+            <div class="weather-widget">
+                <div class="current-weather">
+                    <div class="weather-icon" id="weatherIcon">☀️</div>
+                    <div class="weather-info">
+                        <div class="temperature" id="temperature">24°C</div>
+                        <div class="weather-desc" id="weatherDesc">Perfect for cleanup!</div>
+                        <div class="location" id="location">Santa Monica Beach</div>
+                    </div>
+                </div>
+                <div class="weather-details">
+                    <div class="weather-detail">
+                        <span class="detail-label">Wind</span>
+                        <span class="detail-value" id="windSpeed">8 mph</span>
+                    </div>
+                    <div class="weather-detail">
+                        <span class="detail-label">Humidity</span>
+                        <span class="detail-value" id="humidity">65%</span>
+                    </div>
+                    <div class="weather-detail">
+                        <span class="detail-label">UV Index</span>
+                        <span class="detail-value" id="uvIndex">6</span>
+                    </div>
+                    <div class="weather-detail">
+                        <span class="detail-label">Tide</span>
+                        <span class="detail-value" id="tideInfo">Low 2:30 PM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Squad Section -->
+    <section id="squad" class="squad-section">
+        <div class="container">
+            <h2 class="section-title">Your Squad</h2>
+            <div class="squad-content">
+                <div class="squad-stats">
+                    <div class="squad-card">
+                        <h3>Ocean Guardians</h3>
+                        <p class="squad-members">24 members</p>
+                        <p class="squad-impact">287 lbs collected this month</p>
+                        <div class="member-avatars">
+                            <div class="avatar">🧑‍🤝‍🧑</div>
+                            <div class="avatar">👩‍🤝‍👨</div>
+                            <div class="avatar">👫</div>
+                            <div class="avatar-more">+21</div>
+                        </div>
+                        <button class="btn btn-primary">View Squad</button>
+                    </div>
+                </div>
+                <div class="squad-leaderboard">
+                    <h3>This Week's Top Squads</h3>
+                    <div class="leaderboard" id="leaderboard">
+                        <!-- Leaderboard will be populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact" class="impact-section">
+        <div class="container">
+            <h2 class="section-title">Environmental Impact</h2>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-icon">🐢</div>
+                    <h3>Wildlife Protected</h3>
+                    <p>Your cleanups directly protect marine life from plastic pollution and debris.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">🌊</div>
+                    <h3>Ocean Health</h3>
+                    <p>Cleaner beaches mean healthier ocean ecosystems for future generations.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">🌱</div>
+                    <h3>Community Growth</h3>
+                    <p>Building environmental awareness and action in your local community.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>🌊 ShoreSquad</h3>
+                    <p>Making beach cleanups social, fun, and impactful.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Community</h4>
+                        <ul>
+                            <li><a href="#" aria-label="Join a squad">Join Squad</a></li>
+                            <li><a href="#" aria-label="Create an event">Create Event</a></li>
+                            <li><a href="#" aria-label="View leaderboard">Leaderboard</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#" aria-label="Cleanup guidelines">Cleanup Guide</a></li>
+                            <li><a href="#" aria-label="Safety tips">Safety Tips</a></li>
+                            <li><a href="#" aria-label="Environmental impact">Impact Reports</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="#" aria-label="Help center">Help Center</a></li>
+                            <li><a href="#" aria-label="Contact us">Contact</a></li>
+                            <li><a href="#" aria-label="Privacy policy">Privacy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ShoreSquad. Making waves for a cleaner planet. 🌊</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="joinSquadModal" aria-hidden="true" role="dialog" aria-labelledby="joinSquadTitle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="joinSquadTitle">Join a Squad</h2>
+                <button class="modal-close" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Find and join local beach cleanup squads in your area!</p>
+                <form id="joinSquadForm">
+                    <div class="form-group">
+                        <label for="userLocation">Your Location</label>
+                        <input type="text" id="userLocation" name="location" placeholder="Enter your city or zip code" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="squadPreference">Squad Preference</label>
+                        <select id="squadPreference" name="preference">
+                            <option value="beginner">Beginner Friendly</option>
+                            <option value="experienced">Experienced Cleaners</option>
+                            <option value="family">Family Groups</option>
+                            <option value="students">Student Groups</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Find Squads</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
+</html>
