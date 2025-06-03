@@ -99,10 +99,10 @@ class ShoreSquadApp {
       behavior: 'smooth'
     });
   }
-
   bindHeroActions() {
     const joinSquadBtn = document.getElementById('joinSquadBtn');
     const createEventBtn = document.getElementById('createEventBtn');
+    const joinNextCleanupBtn = document.getElementById('joinNextCleanupBtn');
 
     joinSquadBtn?.addEventListener('click', () => {
       this.openModal('joinSquadModal');
@@ -110,6 +110,10 @@ class ShoreSquadApp {
 
     createEventBtn?.addEventListener('click', () => {
       this.showCreateEventInterface();
+    });
+
+    joinNextCleanupBtn?.addEventListener('click', () => {
+      this.handleJoinNextCleanup();
     });
   }
 
@@ -551,11 +555,20 @@ class ShoreSquadApp {
       </div>
     `;
   }
-
   handleJoinEvent(eventId) {
     // Simulate joining an event
     console.log(`Joining event ${eventId}`);
     this.showNotification('Successfully joined the cleanup event!', 'success');
+  }
+
+  handleJoinNextCleanup() {
+    // Handle joining the next cleanup at Pasir Ris
+    this.showNotification('Awesome! You\'ve joined the Pasir Ris Beach cleanup. Check your email for details!', 'success');
+    
+    // Simulate API call to register user
+    setTimeout(() => {
+      this.showNotification('Calendar invite sent! See you at Pasir Ris Beach this weekend! 🌊', 'info');
+    }, 2000);
   }
 
   showCreateEventInterface() {

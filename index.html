@@ -36,9 +36,11 @@
                 </li>
                 <li class="nav-item" role="none">
                     <a href="#events" class="nav-link" role="menuitem">Events</a>
+                </li>                <li class="nav-item" role="none">
+                    <a href="#weather" class="nav-link" role="menuitem">Weather</a>
                 </li>
                 <li class="nav-item" role="none">
-                    <a href="#weather" class="nav-link" role="menuitem">Weather</a>
+                    <a href="#next-cleanup" class="nav-link" role="menuitem">Next Cleanup</a>
                 </li>
                 <li class="nav-item" role="none">
                     <a href="#squad" class="nav-link" role="menuitem">Your Squad</a>
@@ -135,6 +137,51 @@
                     <div class="weather-detail">
                         <span class="detail-label">Tide</span>
                         <span class="detail-value" id="tideInfo">Low 2:30 PM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- Next Cleanup Location -->
+    <section id="next-cleanup" class="next-cleanup-section">
+        <div class="container">
+            <h2 class="section-title">Next Cleanup Location</h2>
+            <div class="cleanup-location-content">
+                <div class="location-info">
+                    <h3>Pasir Ris Beach</h3>
+                    <p class="location-details">📍 Street View Asia, Singapore</p>
+                    <p class="coordinates">Coordinates: 1.381497, 103.955574</p>
+                    <div class="cleanup-details">
+                        <div class="detail-item">
+                            <span class="icon">📅</span>
+                            <span>Next Cleanup: This Weekend</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="icon">⏰</span>
+                            <span>Time: 8:00 AM - 12:00 PM</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="icon">👥</span>
+                            <span>Expected Participants: 45-60</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="joinNextCleanupBtn">Join This Cleanup</button>
+                </div>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.688519087!2d103.95357497475!3d1.3814970986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da3d8b7b4c8f8b%3A0x8b4c8f8b7b4c8f8b!2sNext%20Cleanup%20-%20Pasir%20Ris%20Beach!5e0!3m2!1sen!2ssg!4v1699123456789!5m2!1sen!2ssg&markers=color:red%7Clabel:C%7C1.381497,103.955574"
+                        width="100%" 
+                        height="400" 
+                        style="border:0; border-radius: 12px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Next Cleanup Location - Pasir Ris Beach">
+                    </iframe>
+                    <div class="map-overlay">
+                        <div class="location-pin">
+                            <span class="pin-icon">📍</span>
+                            <span class="pin-label">Next Cleanup</span>
+                        </div>
                     </div>
                 </div>
             </div>
